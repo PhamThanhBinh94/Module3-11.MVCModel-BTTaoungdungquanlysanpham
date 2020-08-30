@@ -27,8 +27,10 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "edit":
                 updateProduct(request,response);
+                break;
             case "delete":
                 deleteProduct(request,response);
+                break;
             default:
                 break;
         };
@@ -39,7 +41,7 @@ public class ProductServlet extends HttpServlet {
         Product product = this.productService.findById(id);
         RequestDispatcher dispatcher;
         if (product == null){
-            dispatcher = request.getRequestDispatcher("WEB_INF/error-404.jsp");
+            dispatcher = request.getRequestDispatcher("WEB-INF/error-404.jsp");
         } else {
             this.productService.delete(id);
             try {
@@ -110,6 +112,7 @@ public class ProductServlet extends HttpServlet {
                 break;
             case "delele":
                 showDeleteForm(request,response);
+                break;
             default:
                 listProducts(request,response);
         }
@@ -124,13 +127,13 @@ public class ProductServlet extends HttpServlet {
         }else {
             request.setAttribute("product", product);
             dispatcher = request.getRequestDispatcher("WEB-INF/product/delete.jsp");
-            try {
-                dispatcher.forward(request,response);
-            } catch (ServletException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        }
+        try {
+            dispatcher.forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -141,7 +144,7 @@ public class ProductServlet extends HttpServlet {
         if (product ==null){
             dispatcher = request.getRequestDispatcher("WEB-INF/error-404.jsp");
         } else {
-            request.setAttribute("products", product);
+            request.setAttribute("product", product);
             dispatcher = request.getRequestDispatcher("WEB-INF/product/edit.jsp");
             try {
                 dispatcher.forward(request,response);

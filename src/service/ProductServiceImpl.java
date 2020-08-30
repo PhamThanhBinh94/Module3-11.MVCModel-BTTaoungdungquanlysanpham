@@ -22,7 +22,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findById(int id) {
-        return products.get(id);
+        for (Product product: products){
+            if (product.getId() == id){
+                return product;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -32,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void delete(int id) {
-        products.remove(id);
+       products.removeIf(product -> product.getId() == id);
     }
 
     @Override

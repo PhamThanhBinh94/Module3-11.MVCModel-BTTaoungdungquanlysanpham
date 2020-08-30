@@ -42,6 +42,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void update(int id, Product product) {
-        products.add(product);
+        for (Product product1: products){
+            if (product1.getId() == id){
+                product1 = product;
+            }
+        }
     }
 }
